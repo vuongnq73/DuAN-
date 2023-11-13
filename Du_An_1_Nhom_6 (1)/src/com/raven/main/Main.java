@@ -13,7 +13,9 @@ import com.raven.form.Form_Ban_Hang;
 import com.raven.form.Form_Thong_Ke;
 import com.raven.form.*;
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,20 +30,21 @@ public class Main extends javax.swing.JFrame {
     private Form_San_Pham SanPham;
     private Form_Hoa_Don Hoadon;
     private Form_Nhan_Vien NhanVien;
-    private  Form_Ban_Hang banHang;
+    private Form_Ban_Hang banHang;
     private Form_Voucher voucher;
     private Form_Khach_Hang khachHang;
 
     public Main() {
         initComponents();
+        this.login();
         setBackground(new Color(0, 0, 0, 0));
         thongKe = new Form_Thong_Ke();
         SanPham = new Form_San_Pham();
         Hoadon = new Form_Hoa_Don();
         NhanVien = new Form_Nhan_Vien();
-        banHang= new Form_Ban_Hang();
-        khachHang= new Form_Khach_Hang();
-        voucher= new Form_Voucher();
+        banHang = new Form_Ban_Hang();
+        khachHang = new Form_Khach_Hang();
+        voucher = new Form_Voucher();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -55,17 +58,33 @@ public class Main extends javax.swing.JFrame {
                     setForm(SanPham);
                 } else if (index == 3) {
                     setForm(NhanVien);
-                }else if (index == 4) {
+                } else if (index == 4) {
                     setForm(khachHang);
-                }else if (index == 5) {
+                } else if (index == 5) {
                     setForm(voucher);
-                }else if (index == 6) {
+                } else if (index == 6) {
                     setForm(thongKe);
+                } else if (index == 7) {
+                    dangXuat();
                 }
             }
         });
         //  set when system open start with home form
         setForm(new Form_Thong_Ke());
+    }
+
+    void dangXuat() {
+        int comf = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Đăng Xuất Không", "Thông Báo", JOptionPane.YES_NO_OPTION, 2);
+        if (comf == JOptionPane.YES_OPTION) {
+            this.dispose();
+            this.login();
+        }
+
+    }
+
+    void login() {
+        new Form_Login(this, true).setVisible(true);
+
     }
 
     private void setForm(JComponent com) {
