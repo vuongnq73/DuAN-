@@ -63,8 +63,6 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(242, 242, 242));
-
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         card1.setColor1(new java.awt.Color(142, 142, 250));

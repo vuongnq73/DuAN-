@@ -93,8 +93,6 @@ public class Main extends javax.swing.JFrame {
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1480, 757));
 
-        panelBorder1.setBackground(new java.awt.Color(242, 242, 242));
-
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         mainPanel.setOpaque(false);
