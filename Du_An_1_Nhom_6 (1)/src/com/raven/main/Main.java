@@ -9,7 +9,7 @@ import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_San_Pham;
 import com.raven.form.Form_Hoa_Don;
 import com.raven.form.Form_Nhan_Vien;
-import com.raven.form.form_Ban_Hang;
+import com.raven.form.Form_Ban_Hang;
 import com.raven.form.Form_Thong_Ke;
 import com.raven.form.*;
 import java.awt.Color;
@@ -28,7 +28,7 @@ public class Main extends javax.swing.JFrame {
     private Form_San_Pham SanPham;
     private Form_Hoa_Don Hoadon;
     private Form_Nhan_Vien NhanVien;
-    private  form_Ban_Hang banHang;
+    private  Form_Ban_Hang banHang;
     private Form_Voucher voucher;
     private Form_Khach_Hang khachHang;
 
@@ -39,7 +39,7 @@ public class Main extends javax.swing.JFrame {
         SanPham = new Form_San_Pham();
         Hoadon = new Form_Hoa_Don();
         NhanVien = new Form_Nhan_Vien();
-        banHang= new form_Ban_Hang();
+        banHang= new Form_Ban_Hang();
         khachHang= new Form_Khach_Hang();
         voucher= new Form_Voucher();
         menu.initMoving(Main.this);

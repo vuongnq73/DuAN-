@@ -8,12 +8,12 @@ package com.raven.form;
  *
  * @author admin
  */
-public class Form_San_Pham extends javax.swing.JPanel {
+public class Form_Ban_Hang extends javax.swing.JPanel {
 
     /**
      * Creates new form form_Ban_Hang
      */
-    public Form_San_Pham() {
+    public Form_Ban_Hang() {
         initComponents();
         
     }
