@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 public class DBconnect {
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "DUAN1_NHOM6";
+    public static final String DBNAME = "NHOM6__DUAN1";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "111";
+    public static final String PASSWORD = "12345";
 
     /**
      * Get connection to MSSQL Server

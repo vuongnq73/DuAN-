@@ -4,12 +4,19 @@
  */
 package com.raven.form;
 
+import Utils.Auth;
+import Utils.MsgBox;
+import com.raven.Service.NhanVienService;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import com.raven.model.*;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -18,15 +25,39 @@ import javax.swing.Timer;
 public class Form_Login extends javax.swing.JDialog {
 
     private java.awt.Frame cc;
+    NhanVienService service = new NhanVienService();
 
     public Form_Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         runTieuDe();
-          setSize(1180, 657);
+        setSize(1180, 657);
         setLocationRelativeTo(null);
         this.cc = parent;
         initComponents();
 
+    }
+
+    void DangNhap() {
+        String Ma = txtUser.getText();
+        String PassW = new String(txtPass.getPassword());
+        Model_NhanVien nv = service.selectById(Ma);
+        if (nv == null) {
+            MsgBox.alert(this, "sai Tên Đăng Nhập");
+        } else {
+            if (!nv.getMatKhau().equalsIgnoreCase(PassW)) {
+                MsgBox.alert(this, "Sai Mật Khẩu");
+            } else {
+                if(nv.isChuVu()){
+                    JOptionPane.showMessageDialog(this, "Bạn Đã Đăng Nhập Với Tư Cách Nhân Viên","thông báo",2);
+                }else{
+                         JOptionPane.showMessageDialog(this, "Bạn Đã Đăng Nhập Với Tư Cách Quản Lý","Thông Báo ",2); 
+                }
+                Auth.user = nv;
+                this.dispose();
+                cc.setVisible(true);
+
+            }
+        }
     }
 
     void ketThuc() {
@@ -49,6 +80,7 @@ public class Form_Login extends javax.swing.JDialog {
         timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                changeTextColor();
                 posX--;
 
                 lable.setLocation(posX, lable.getY());
@@ -65,6 +97,14 @@ public class Form_Login extends javax.swing.JDialog {
         pack();
 
         timer.start();
+    }
+    private void changeTextColor() {
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("ss"); // Lấy giây
+        int second = Integer.parseInt(sdf.format(now));
+        float hue = (float) second / 60.0f; // Chia cho 60 để có giá trị nằm trong khoảng [0, 1]
+        Color color = Color.getHSBColor(hue, 1.0f, 1.0f);
+        lable.setForeground(color);
     }
 
     /**
@@ -102,7 +142,7 @@ public class Form_Login extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtUser.setText("ADMIN");
+        txtUser.setText("NV002");
 
         jLabel1.setText("User Name");
 
@@ -111,7 +151,7 @@ public class Form_Login extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
 
-        txtPass.setText("12345");
+        txtPass.setText("password456");
 
         jLabel3.setText("Password");
 
@@ -272,12 +312,8 @@ public class Form_Login extends javax.swing.JDialog {
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         // TODO add your handling code here:
-        dangNhap();
+        DangNhap();
     }//GEN-LAST:event_myButton1ActionPerformed
-    void dangNhap() {
-        this.dispose();
-        cc.setVisible(true);
-    }
 
     /**
      * @param args the command line arguments

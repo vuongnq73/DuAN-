@@ -120,11 +120,11 @@ public class Form_Hoa_Don extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Ngày Tạo", "Trạng Thái ", "Hình Thức TT", "Tên NV", "Tên KH", "Tổng Tiền"
+                "STT", "Ngày Tạo", "Hình Thức TT", "Người Tạo", "Tên KH", "Phí Ship", "Tổng Tiền", "Voucher", "Tổng Tiền Sau Giảm"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, false, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,6 +132,9 @@ public class Form_Hoa_Don extends javax.swing.JPanel {
             }
         });
         spTable.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(7).setMinWidth(40);
+        }
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -232,11 +235,11 @@ public class Form_Hoa_Don extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Mã SP", "Tên SP", "Số Lượng ", "Màu Sắc", "Dáng Áo", "Cổ Áo", "Chất Liệu", "Size", "Đơn Giá"
+                "Mã Hóa Đơn", "Tên SP", "Số Lượng ", "Đơn Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true, true, true, true
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
