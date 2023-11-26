@@ -106,7 +106,6 @@ public class NhanHieuService extends InterfaceCRUD<Model_NhanHieu, String> {
 
    
 
-    @Override
     public Model_NhanHieu selectByTen(String ten) {
         String sql="select id, manhanhieu,tennhanhieu,TrangThai,CreateAt,CreateBy from NhanHieu where tennhanhieu=?";
         List<Model_NhanHieu>listNH= new ArrayList<>();

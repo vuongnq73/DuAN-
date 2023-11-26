@@ -51,7 +51,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import javax.swing.JTable;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 import org.apache.poi.ss.usermodel.Name;
 
 /**
@@ -254,7 +258,7 @@ public class Form_Hoa_Don extends javax.swing.JPanel implements Runnable, Thread
 
         try {
             String MAHD = String.valueOf(table.getValueAt(Row, 1));
-            Model_lichSuHoaDon HDCT = serviceLS.selectLichSuHoaDonByID(MAHD);
+            Model_lichSuHoaDon1 HDCT = serviceLS.selectLichSuHoaDonByID(MAHD);
 
             int stt = 1;
             String tt = "";
@@ -1342,7 +1346,25 @@ public class Form_Hoa_Don extends javax.swing.JPanel implements Runnable, Thread
     private void tableLSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLSMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tableLSMouseClicked
-
+// private void createQR(){
+//     try {
+//            
+//            ByteArrayOutputStream out = QRCode.from(qr_text.getText())
+//                    .to(ImageType.PNG).stream();
+//            
+//            String f_name = qr_text.getText();
+//            String Path_name = "D:\\aaaaaaaaaa\\" ;
+//            
+//            FileOutputStream fout = new FileOutputStream(new File(Path_name +(f_name + ".PNG")));
+//            fout.write(out.toByteArray());
+//            fout.flush();
+//            
+//            
+//            
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+// }
     private void InHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InHDActionPerformed
 
         String Path = "E:\\HoaDon";

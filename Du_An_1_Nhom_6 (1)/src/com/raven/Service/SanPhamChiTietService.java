@@ -100,7 +100,6 @@ public class SanPhamChiTietService extends InterfaceCRUD<Model_SanPhamChiTiet, S
         return null;
     }
 
-    @Override
     public Model_SanPhamChiTiet selectByTen(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

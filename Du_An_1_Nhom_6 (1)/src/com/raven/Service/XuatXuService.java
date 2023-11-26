@@ -105,7 +105,6 @@ public class XuatXuService extends InterfaceCRUD<Model_XuatXu, String> {
 
    
 
-    @Override
     public Model_XuatXu selectByTen(String ten) {
         String sql="select id, MaXuatXu,NoiXuatXu,TrangThai,CreateAt,CreateBy from xuatxu where noixuatxu=?";
         List<Model_XuatXu>listXX= new ArrayList<>();

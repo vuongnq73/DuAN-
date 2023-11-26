@@ -59,7 +59,6 @@ NV= new Model_NhanVien(rs.getString(1), rs.getString(2), rs.getBoolean(3), rs.ge
     }
 
    
-    @Override
     public Model_NhanVien selectByTen(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

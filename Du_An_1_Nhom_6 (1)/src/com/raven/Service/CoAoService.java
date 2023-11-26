@@ -110,7 +110,6 @@ public class CoAoService extends InterfaceCRUD<Model_CoAo, String> {
 
    
 
-    @Override
     public Model_CoAo selectByTen(String ten) {
         String sql="select id, macoao,tencoao,TrangThai,CreateAt,CreateBy from CoAO where tencoao=?";
         List<Model_CoAo>listDA= new ArrayList<>();

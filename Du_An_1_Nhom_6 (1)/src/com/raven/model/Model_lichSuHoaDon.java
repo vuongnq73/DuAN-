@@ -4,54 +4,98 @@
  */
 package com.raven.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
+import java.sql.Date;
 /**
  *
- * @author admin
+ * @author lenovo
  */
-public class Model_lichSuHoaDon {
-       private Date NgayTaoHD;
-       private String nguoiTao;
-       private boolean TrangThai;
+public class Model_LichSuHoaDon {
+    private Integer id;
+    private String hanhDong;
+    private Boolean trangThai;
+    private Date createAt;
+    private String createBy;
+    private Date updateAt;
+    private String updateBy;
+    private Boolean deleted;
 
-     
-       
-    public Date getNgayTaoHD() {
-        return NgayTaoHD;
+    public Model_LichSuHoaDon() {
     }
 
-    public void setNgayTaoHD(Date NgayTaoHD) {
-        this.NgayTaoHD = NgayTaoHD;
+    public Model_LichSuHoaDon(Integer id, String hanhDong, Boolean trangThai, Date createAt, String createBy, Date updateAt, String updateBy, Boolean deleted) {
+        this.id = id;
+        this.hanhDong = hanhDong;
+        this.trangThai = trangThai;
+        this.createAt = createAt;
+        this.createBy = createBy;
+        this.updateAt = updateAt;
+        this.updateBy = updateBy;
+        this.deleted = deleted;
     }
 
-    public String getNguoiTao() {
-        return nguoiTao;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNguoiTao(String nguoiTao) {
-        this.nguoiTao = nguoiTao;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public boolean isTrangThai() {
-        return TrangThai;
+    public String getHanhDong() {
+        return hanhDong;
     }
 
-    public void setTrangThai(boolean TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setHanhDong(String hanhDong) {
+        this.hanhDong = hanhDong;
     }
 
-    public Model_lichSuHoaDon(Date NgayTaoHD, String nguoiTao, boolean TrangThai) {
-        this.NgayTaoHD = NgayTaoHD;
-        this.nguoiTao = nguoiTao;
-        this.TrangThai = TrangThai;
+    public Boolean getTrangThai() {
+        return trangThai;
     }
 
-    public Model_lichSuHoaDon() {
+    public void setTrangThai(Boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
 
-   
-  
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    
 }

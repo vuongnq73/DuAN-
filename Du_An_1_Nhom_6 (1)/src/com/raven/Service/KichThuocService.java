@@ -107,7 +107,6 @@ public class KichThuocService extends InterfaceCRUD<Model_KichThuoc, String> {
 
    
 
-    @Override
     public Model_KichThuoc selectByTen(String ten) {
         String sql="select id, makichthuoc,tenkichthuoc,TrangThai,CreateAt,CreateBy from kichthuoc where tenkichthuoc=?";
         List<Model_KichThuoc>listKT= new ArrayList<>();

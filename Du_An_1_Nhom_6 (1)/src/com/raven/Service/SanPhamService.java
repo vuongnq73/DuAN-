@@ -110,7 +110,6 @@ public class SanPhamService extends InterfaceCRUD<Model_SanPham, String>{
         return null;
     }
 
-    @Override
     public Model_SanPham selectByTen(String ma) {
         String sql="Select  id,masanpham,tensanpham,createAt,CreateBy,trangthai from SanPham where tensanpham=?";
         try {

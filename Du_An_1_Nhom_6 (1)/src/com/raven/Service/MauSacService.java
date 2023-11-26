@@ -105,7 +105,6 @@ public class MauSacService extends InterfaceCRUD<Model_MauSac, String>{
         return null;
     }
 
-    @Override
     public Model_MauSac selectByTen(String id) {
         String sql="select id, Mamausac,tenmausac,TrangThai,CreateAt,CreateBy from mausac where tenmausac=?";
         List<Model_MauSac>listMS= new ArrayList<>();

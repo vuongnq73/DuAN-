@@ -108,7 +108,6 @@ public class ChatLieuService extends InterfaceCRUD<Model_ChatLieu, String>{
         return null;
     }
 
-    @Override
     public Model_ChatLieu selectByTen(String id) {
         String sql="select id, machatlieu,tenchatlieu,TrangThai,CreateAt,CreateBy from chatlieu where tenchatlieu=?";
         List<Model_ChatLieu>listCl= new ArrayList<>();

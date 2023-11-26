@@ -23,18 +23,18 @@ public class LichSuHoaDon_SerVice {
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    List<Model_lichSuHoaDon> listNV = new ArrayList<>();
-    List<Model_lichSuHoaDon> listHDCT = new ArrayList<>();
+    List<Model_lichSuHoaDon1> listNV = new ArrayList<>();
+    List<Model_lichSuHoaDon1> listHDCT = new ArrayList<>();
 
-    public List<Model_lichSuHoaDon> selectALllLichSuHoaDon() {
+    public List<Model_lichSuHoaDon1> selectALllLichSuHoaDon() {
         sql = "  select HoaDon.NgayThanhToan,HoaDon.CreateBy,HoaDon.TrangThai   from HoaDon";
-        List<Model_lichSuHoaDon> listNV = new ArrayList<>();
+        List<Model_lichSuHoaDon1> listNV = new ArrayList<>();
         try {// lấy dc dữ liệu
             con = DBconnect.getConnection();// kết nôi
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {// đọc từng dòng dữ liệu
-                Model_lichSuHoaDon LSHD = new Model_lichSuHoaDon(rs.getDate(1), rs.getString(2), rs.getBoolean(3));
+                Model_lichSuHoaDon1 LSHD = new Model_lichSuHoaDon1(rs.getDate(1), rs.getString(2), rs.getBoolean(3));
                 listNV.add(LSHD);
             }
             return listNV;
@@ -44,8 +44,8 @@ public class LichSuHoaDon_SerVice {
         }
     }
     
-        public Model_lichSuHoaDon selectLichSuHoaDonByID(String ID) {
-        Model_lichSuHoaDon LSHD = null;
+        public Model_lichSuHoaDon1 selectLichSuHoaDonByID(String ID) {
+        Model_lichSuHoaDon1 LSHD = null;
         sql = "	 select HoaDon.NgayThanhToan,HoaDon.CreateBy,HoaDon.TrangThai   from HoaDon where HoaDon.MaHoaDon=?";
         try {// lấy dc dữ liệu
             con = DBconnect.getConnection();// kết nôi
@@ -53,7 +53,7 @@ public class LichSuHoaDon_SerVice {
             ps.setObject(1, ID);
             rs = ps.executeQuery();
             while (rs.next()) {// đọc từng dòng dữ liệu
-              LSHD = new Model_lichSuHoaDon(rs.getDate(1), rs.getString(2), rs.getBoolean(3));
+              LSHD = new Model_lichSuHoaDon1(rs.getDate(1), rs.getString(2), rs.getBoolean(3));
 
             }
             return LSHD;
