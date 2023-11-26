@@ -20,5 +20,5 @@ public abstract class InterfaceCRUD<EntityType, KeyType> {
 
     public abstract List<EntityType> selectALll();
     public abstract EntityType selectById(KeyType id);
-
+     public abstract EntityType selectByTen(KeyType id);
 }

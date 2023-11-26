@@ -219,8 +219,11 @@
                     </Component>
                     <Component class="swing_Login.MyPassword" name="txtPass">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="password456"/>
+                        <Property name="text" type="java.lang.String" value="pass456"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPassActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>

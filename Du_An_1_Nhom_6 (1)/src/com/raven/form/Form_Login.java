@@ -151,7 +151,12 @@ public class Form_Login extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
 
-        txtPass.setText("password456");
+        txtPass.setText("pass456");
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Password");
 
@@ -314,6 +319,10 @@ public class Form_Login extends javax.swing.JDialog {
         // TODO add your handling code here:
         DangNhap();
     }//GEN-LAST:event_myButton1ActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments

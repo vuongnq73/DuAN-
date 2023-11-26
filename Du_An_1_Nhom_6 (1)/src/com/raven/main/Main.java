@@ -5,7 +5,8 @@
  */
 package com.raven.main;
 
-import com.raven.event.EventMenuSelected;
+import 
+        com.raven.event.EventMenuSelected;
 import com.raven.form.Form_San_Pham;
 import com.raven.form.Form_Hoa_Don;
 import com.raven.form.Form_Nhan_Vien;
@@ -36,7 +37,7 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-        this.login();
+        //this.login();
         setBackground(new Color(0, 0, 0, 0));
         thongKe = new Form_Thong_Ke();
         SanPham = new Form_San_Pham();
@@ -79,6 +80,7 @@ public class Main extends javax.swing.JFrame {
             this.dispose();
             this.login();
         }
+        
 
     }
 
@@ -88,6 +90,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void setForm(JComponent com) {
+
         mainPanel.removeAll();
         mainPanel.add(com);
         mainPanel.repaint();
