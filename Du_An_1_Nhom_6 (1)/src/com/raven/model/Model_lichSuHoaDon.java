@@ -4,98 +4,100 @@
  */
 package com.raven.model;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  *
- * @author lenovo
+ * @author admin
  */
 public class Model_LichSuHoaDon {
-    private Integer id;
-    private String hanhDong;
-    private Boolean trangThai;
-    private Date createAt;
-    private String createBy;
-    private Date updateAt;
-    private String updateBy;
-    private Boolean deleted;
+
+    private int STT;
+    private String MaKH;
+    private boolean HanhDong;
+    private Date ngayTao;
+    private String nguoiTao;
+    private Date ngaySua;
+    private String nguoiSua;
+    private boolean trangThai;
+
+    public int getSTT() {
+        return STT;
+    }
+
+    public void setSTT(int STT) {
+        this.STT = STT;
+    }
+
+    public String getMaKH() {
+        return MaKH;
+    }
+
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
+    }
+
+    public boolean isHanhDong() {
+        return HanhDong;
+    }
+
+    public void setHanhDong(boolean HanhDong) {
+        this.HanhDong = HanhDong;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getNguoiTao() {
+        return nguoiTao;
+    }
+
+    public void setNguoiTao(String nguoiTao) {
+        this.nguoiTao = nguoiTao;
+    }
+
+    public Date getNgaySua() {
+        return ngaySua;
+    }
+
+    public void setNgaySua(Date ngaySua) {
+        this.ngaySua = ngaySua;
+    }
+
+    public String getNguoiSua() {
+        return nguoiSua;
+    }
+
+    public void setNguoiSua(String nguoiSua) {
+        this.nguoiSua = nguoiSua;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Model_LichSuHoaDon(int STT, String MaKH, boolean HanhDong, Date ngayTao, String nguoiTao, Date ngaySua, String nguoiSua, boolean trangThai) {
+        this.STT = STT;
+        this.MaKH = MaKH;
+        this.HanhDong = HanhDong;
+        this.ngayTao = ngayTao;
+        this.nguoiTao = nguoiTao;
+        this.ngaySua = ngaySua;
+        this.nguoiSua = nguoiSua;
+        this.trangThai = trangThai;
+    }
 
     public Model_LichSuHoaDon() {
     }
 
-    public Model_LichSuHoaDon(Integer id, String hanhDong, Boolean trangThai, Date createAt, String createBy, Date updateAt, String updateBy, Boolean deleted) {
-        this.id = id;
-        this.hanhDong = hanhDong;
-        this.trangThai = trangThai;
-        this.createAt = createAt;
-        this.createBy = createBy;
-        this.updateAt = updateAt;
-        this.updateBy = updateBy;
-        this.deleted = deleted;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getHanhDong() {
-        return hanhDong;
-    }
-
-    public void setHanhDong(String hanhDong) {
-        this.hanhDong = hanhDong;
-    }
-
-    public Boolean getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(Boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-    
-    
 }
