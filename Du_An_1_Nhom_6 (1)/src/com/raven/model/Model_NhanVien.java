@@ -17,34 +17,31 @@ public class Model_NhanVien {
     private boolean ChuVu;
     private String HoTen;
     private boolean GioiTinh;
+    private String CCCD;
     private String SDT;
     private String Email;
     private String DiaChi;
     private boolean TrangThai;
-    private Date CreateAt;
-    private String createBy;
-    private Date UpDateAt;
-    private String UpdateBy;
-    private  boolean Deleted;
+//    private Date CreateAt;
+//    private String createBy;
+//    private Date UpDateAt;
+//    private String UpdateBy;
+//    private  boolean Deleted;
 
     public Model_NhanVien() {
     }
 
-    public Model_NhanVien(String MaNhanVien, String MatKhau, boolean ChuVu, String HoTen, boolean GioiTinh, String SDT, String Email, String DiaChi, boolean TrangThai, Date CreateAt, String createBy, Date UpDateAt, String UpdateBy, boolean Deleted) {
+    public Model_NhanVien(String MaNhanVien, String MatKhau, boolean ChuVu, String HoTen, boolean GioiTinh, String CCCD, String SDT, String Email, String DiaChi, boolean TrangThai) {
         this.MaNhanVien = MaNhanVien;
         this.MatKhau = MatKhau;
         this.ChuVu = ChuVu;
         this.HoTen = HoTen;
         this.GioiTinh = GioiTinh;
+        this.CCCD = CCCD;
         this.SDT = SDT;
         this.Email = Email;
         this.DiaChi = DiaChi;
         this.TrangThai = TrangThai;
-        this.CreateAt = CreateAt;
-        this.createBy = createBy;
-        this.UpDateAt = UpDateAt;
-        this.UpdateBy = UpdateBy;
-        this.Deleted = Deleted;
     }
 
     public String getMaNhanVien() {
@@ -87,6 +84,14 @@ public class Model_NhanVien {
         this.GioiTinh = GioiTinh;
     }
 
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
+    }
+
     public String getSDT() {
         return SDT;
     }
@@ -119,46 +124,12 @@ public class Model_NhanVien {
         this.TrangThai = TrangThai;
     }
 
-    public Date getCreateAt() {
-        return CreateAt;
-    }
-
-    public void setCreateAt(Date CreateAt) {
-        this.CreateAt = CreateAt;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpDateAt() {
-        return UpDateAt;
-    }
-
-    public void setUpDateAt(Date UpDateAt) {
-        this.UpDateAt = UpDateAt;
-    }
-
-    public String getUpdateBy() {
-        return UpdateBy;
-    }
-
-    public void setUpdateBy(String UpdateBy) {
-        this.UpdateBy = UpdateBy;
-    }
-
-    public boolean isDeleted() {
-        return Deleted;
-    }
-
-    public void setDeleted(boolean Deleted) {
-        this.Deleted = Deleted;
+    
+    public Object[] toDataRow(){
+        
+       return new Object[]{this.MaNhanVien, this.MatKhau, this.ChuVu ? "Nhân viên":"Quản lí", this.HoTen, this.GioiTinh ? "Nam":"Nữ",this.CCCD ,this.SDT, this.Email, this.DiaChi, this.TrangThai ? "Đang làm việc":"Nghỉ làm"};
+       
     }
    
-
    
 }
