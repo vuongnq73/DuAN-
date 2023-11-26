@@ -21,10 +21,7 @@ public class NhanVienService extends InterfaceCRUD<Model_NhanVien, String>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void update(Model_NhanVien entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
     @Override
     public void delete(String id) {
@@ -54,5 +51,16 @@ NV= new Model_NhanVien(rs.getString(1), rs.getString(2), rs.getBoolean(3), rs.ge
             return null;
     }
 
+    }
+
+    @Override
+    public void update(Model_NhanVien entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
+    @Override
+    public Model_NhanVien selectByTen(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

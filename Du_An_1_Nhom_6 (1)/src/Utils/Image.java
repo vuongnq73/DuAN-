@@ -19,11 +19,11 @@ import javax.swing.ImageIcon;
  */
 public class Image {
     public static java.awt.Image getIcon(){
-        URL url= Image.class.getResource("/icon/fpt.png");
+        URL url= Image.class.getResource("/icon/1.png");
         return new ImageIcon(url).getImage();
     }
     public static boolean save(File src){
-        File dst= new File("src/main/Resources/icon",src.getName());
+        File dst= new File("src\\com\\raven\\icon",src.getName());
      if(!dst.getParentFile().exists()){
          dst.getParentFile().mkdirs();
      }
@@ -36,7 +36,7 @@ public class Image {
         }return false;
     }
   public  static ImageIcon read(String fileName){
-      File path= new File("src/main/Resources/icon",fileName);
+      File path= new File("src\\com\\raven\\icon",fileName);
       return new ImageIcon(path.getAbsolutePath());
   }
   
