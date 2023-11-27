@@ -54,7 +54,7 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         mol.setRowCount(0);
         for (int i = 0; i < listKH.size(); i++) {
             Model_KhachHang kh = listKH.get(i);
-            Object[] data = new Object[]{i + 1, kh.getMaKH(), kh.getHoTen(), kh.getSoDt(), kh.getEmail(), kh.getDiaChi(), kh.getCCCD(), kh.isTrangThai() ? "Còn hoạt động" : "Không hoạt động"};
+            Object[] data = new Object[]{i + 1, kh.getMaKH(), kh.getHoTen(), kh.getSoDt(), kh.getEmail(), kh.getDiaChi(), kh.isTrangThai() ? "Còn hoạt động" : "Không hoạt động"};
             mol.addRow(data);
         }
     }
@@ -66,7 +66,6 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         txttenkhachhang.setText(kh.getHoTen());
         txtsodienthoai.setText(kh.getSoDt());
         txtemail.setText(kh.getEmail());
-        txtcccd.setText(kh.getCCCD());
         txtdiachi.setText(kh.getDiaChi());
     }
 
@@ -83,9 +82,8 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         String tenkh = txttenkhachhang.getText().trim();
         String sodt = txtsodienthoai.getText().trim();
         String email = txtemail.getText().trim();
-        String cccd = txtcccd.getText().trim();
         String diachi = txtdiachi.getText().trim();
-        return new Model_KhachHang(ma, tenkh, sodt, email, diachi, cccd,true);
+        return new Model_KhachHang(ma, tenkh, sodt, email, diachi,true);
     }
 
     boolean check() {
@@ -95,7 +93,6 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         String ten = txttenkhachhang.getText();
         String sodienthoai = txtsodienthoai.getText();
         String email = txtemail.getText();
-        String cccd = txtcccd.getText();
         String diachi = txtdiachi.getText();
         if (ten.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên khách hàng rỗng");
@@ -145,20 +142,6 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
                 return false;
             }
         }
-        if (cccd.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Căn cước công dân trống!!!");
-            return false;
-        } else {
-            try {
-                if (cccd.length() != 12) {
-                    JOptionPane.showMessageDialog(this, "Căn cước công dân phải nằm trong khoảng độ dài bằng 12");
-                    return false;
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "");
-                return false;
-            }
-        }
         if (diachi.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Địa chỉ rỗng");
             return false;
@@ -197,17 +180,15 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtsodienthoai = new javax.swing.JTextField();
         txtemail = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtcccd = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtdiachi = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnxoa = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtdiachi = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         tabbed = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -222,7 +203,7 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         txtfind = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(51, 204, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Khách hàng"));
         setPreferredSize(new java.awt.Dimension(915, 600));
 
@@ -233,21 +214,23 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Mã khách hàng");
 
+        txtmakh.setBackground(new java.awt.Color(204, 204, 204));
         txtmakh.setEnabled(false);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Tên khách hàng");
 
+        txttenkhachhang.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Số điện thoại");
 
-        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("CCCD");
+        txtsodienthoai.setBackground(new java.awt.Color(204, 204, 204));
+
+        txtemail.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Địa chỉ...");
-
-        jScrollPane1.setViewportView(txtdiachi);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Email");
@@ -318,10 +301,17 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addGap(10, 10, 10)
                 .addComponent(btnxoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        txtdiachi.setBackground(new java.awt.Color(204, 204, 204));
+        txtdiachi.setColumns(20);
+        txtdiachi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtdiachi.setForeground(new java.awt.Color(255, 255, 255));
+        txtdiachi.setRows(5);
+        jScrollPane2.setViewportView(txtdiachi);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -346,18 +336,12 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
                     .addComponent(txtmakh, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(118, 118, 118)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtcccd, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -366,8 +350,8 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtmakh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,14 +367,10 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtcccd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -399,13 +379,13 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã KH", "Tên KH", "Số ĐT", "Email", "Địa chỉ", "CCCD", "Trạng thái"
+                "STT", "Mã KH", "Tên KH", "Số ĐT", "Email", "Địa chỉ", "Trạng thái"
             }
         ));
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -472,6 +452,8 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
             }
         });
 
+        txtfind.setBackground(new java.awt.Color(204, 204, 204));
+        txtfind.setText("Tìm kiếm theo mã, tên, số điện thoại, email");
         txtfind.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtfindKeyReleased(evt);
@@ -515,7 +497,7 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE)
+                .addComponent(tabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
@@ -614,9 +596,9 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         mol.setRowCount(0);
         int counter = 1;
         String keyword = txtfind.getText();
-        List<Model_KhachHang> listKH = ser.Find(keyword, keyword, keyword, keyword, keyword, keyword, true);
+        List<Model_KhachHang> listKH = ser.Find(keyword, keyword, keyword, keyword, keyword, true);
         for (Model_KhachHang kh : listKH) {
-            Object[] rows = {counter, kh.getMaKH(), kh.getHoTen(), kh.getSoDt(), kh.getEmail(), kh.getDiaChi(), kh.getCCCD(), kh.isTrangThai() ? "Còn hoạt động" : "Không hoạt động"};
+            Object[] rows = {counter, kh.getMaKH(), kh.getHoTen(), kh.getSoDt(), kh.getEmail(), kh.getDiaChi(), kh.isTrangThai() ? "Còn hoạt động" : "Không hoạt động"};
             mol.addRow(rows);
             counter++;
         }
@@ -664,7 +646,7 @@ private void reset() {
         txtsodienthoai.setText("");
         txtdiachi.setText("");
         txtemail.setText("");
-        txtcccd.setText("");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -680,7 +662,6 @@ private void reset() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -688,14 +669,13 @@ private void reset() {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane sptable;
     private javax.swing.JScrollPane sptable1;
     private javax.swing.JTabbedPane tabbed;
     private javax.swing.JTable table;
     private javax.swing.JTable table1;
-    private javax.swing.JTextField txtcccd;
-    private javax.swing.JTextPane txtdiachi;
+    private javax.swing.JTextArea txtdiachi;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtfind;
     private javax.swing.JTextField txtmakh;
