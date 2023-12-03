@@ -100,30 +100,30 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         setDataToChart1(pnlDTTKCot, selectedTimeUnit);
     }
 
-//    private void unit() {
-//        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Số Hóa Đơn", "25"));
-//        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/profit.png")), "Doanh Thu", "$25000000"));
-//        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Khách", "30"));
-//        card4.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Đơn Hủy", "3"));
-//
-//        setBackground(new Color(250, 250, 250));
-////        chart.addLegend("Doanh Thu", new Color(245, 189, 135));
-//        pnlDTTKCot.addLegend("Doanh Thu", new Color(135, 189, 245));
-////        chart.addLegend("Profit", new Color(189, 135, 245));
-////        chart.addLegend("Cost", new Color(139, 229, 222));
-//        pnlDTTKCot.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
-//        pnlDTTKCot.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
-//        pnlDTTKCot.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
-//        pnlDTTKCot.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
-//        pnlDTTKCot.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
-//        pnlDTTKCot.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("July", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("August", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("September", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("October", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("November", new double[]{190, 280, 81, 200}));
-//        pnlDTTKCot.addData(new ModelChart("December", new double[]{190, 280, 81, 200}));
-//    }
+    private void unit() {
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Số Hóa Đơn", "25"));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/profit.png")), "Doanh Thu", "$25000000"));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Khách", "30"));
+        card4.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Đơn Hủy", "3"));
+
+        setBackground(new Color(250, 250, 250));
+//        chart.addLegend("Doanh Thu", new Color(245, 189, 135));
+        pnlDTTKCot.addLegend("Doanh Thu", new Color(135, 189, 245));
+//        chart.addLegend("Profit", new Color(189, 135, 245));
+//        chart.addLegend("Cost", new Color(139, 229, 222));
+        pnlDTTKCot.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
+        pnlDTTKCot.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
+        pnlDTTKCot.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
+        pnlDTTKCot.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
+        pnlDTTKCot.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
+        pnlDTTKCot.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("July", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("August", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("September", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("October", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("November", new double[]{190, 280, 81, 200}));
+        pnlDTTKCot.addData(new ModelChart("December", new double[]{190, 280, 81, 200}));
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
