@@ -46,7 +46,7 @@ public class SanPhamChiTietSV implements SanPhamChiTietIplm{
         }
         return null;
     }
-    public List<SanPhamChiTiet> selectSPCTByTen(String tenspct) {
+    public List<SanPhamChiTiet> selectSPCTByTen(String ma,String tenspct,String mausac,String kichthuoc,String tenNH) {
         String sql="	Select SANPHAM.TenSanPham\n" +
 "	,SANPHAMCHITIET.MaSanPhamCT\n" +
 "	,SANPHAMCHITIET.TenSanPhamCT\n" +
@@ -69,11 +69,15 @@ public class SanPhamChiTietSV implements SanPhamChiTietIplm{
 "	join CoAo on CoAo.id=SANPHAMCHITIET.IdCoAo\n" +
 "	join DangAo on DangAo.id= SANPHAMCHITIET.IdDangAo\n" +
 "	join ChatLieu on ChatLieu.id= SANPHAMCHITIET.IdChatLieu\n" +
-"	where Sanphamchitiet.tensanphamCT like ? ";
+"	where sanphamchitiet.masanphamCT like ? or Sanphamchitiet.tensanphamCT like ? or mausac.tenmausac like ? or kichthuoc.tenkichthuoc like ? or nhanhieu.tennhanhieu like ? ";
         List<SanPhamChiTiet> listSPCT= new ArrayList<>();
         try {
             PreparedStatement ps= conn.prepareStatement(sql);
-            ps.setObject(1,tenspct+"%");
+            ps.setObject(1,ma+"%");
+            ps.setObject(2,tenspct+"%");
+            ps.setObject(3,mausac+"%");
+            ps.setObject(4,kichthuoc+"%");            
+            ps.setObject(5,tenNH+"%");
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 SanPhamChiTiet spct= new SanPhamChiTiet();
@@ -150,4 +154,55 @@ public class SanPhamChiTietSV implements SanPhamChiTietIplm{
         }
         return null;
     }
+    public List<SanPhamChiTiet> selectSPCTBanHang() {
+        String sql="select SANPHAMCHITIET.MaSanPhamCT,SANPHAMCHITIET.TenSanPhamCT,NhanHieu.TenNhanHieu,MauSac.TenMauSac,KichThuoc.TenKichThuoc,SANPHAMCHITIET.SoLuongTon,SANPHAMCHITIET.GiaBan,SANPHAMCHITIET.Id\n" +
+"from SANPHAMCHITIET\n" +
+"join NhanHieu on SANPHAMCHITIET.IdNhanHieu=NhanHieu.id\n" +
+"join XuatXu on XuatXu.Id= SANPHAMCHITIET.IdXuatXu\n" +
+"join KichThuoc on KichThuoc.id = SANPHAMCHITIET.IdXuatXu\n" +
+"join MauSac on MauSac.id= SANPHAMCHITIET.IdMauSac\n" +
+"where SANPHAMCHITIET.TrangThai=1";
+        List<SanPhamChiTiet> listSPCT= new ArrayList<>();
+        try {
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                SanPhamChiTiet spct= new SanPhamChiTiet();
+                
+                spct.setMaSPCT(rs.getString(1));
+                spct.setTenSPCT(rs.getString(2));
+                spct.setTenNhanHieu(rs.getString(3));
+                spct.setTenMauSac(rs.getString(4));
+                spct.setTenKichThuoc(rs.getString(5));
+                spct.setSoLuong(rs.getInt(6));
+                spct.setGiaBan(rs.getBigDecimal(7));
+                spct.setId(rs.getInt(8));
+                listSPCT.add(spct);
+            }
+            return listSPCT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public  List<SanPhamChiTiet> selectByMABH(String ma){
+        String sql="select SANPHAMCHITIET.TenSanPhamCT,SANPHAMCHITIET.GiaBan from SANPHAMCHITIET where MaSanPhamCT=?";
+         List<SanPhamChiTiet> listSPCT= new ArrayList<>();
+        try {
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ps.setObject(1,ma);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                SanPhamChiTiet spct= new SanPhamChiTiet();
+                spct.setTenSPCT(rs.getString(1));
+                spct.setGiaBan(rs.getBigDecimal(2));
+                listSPCT.add(spct);
+            }
+            return  listSPCT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
 }
