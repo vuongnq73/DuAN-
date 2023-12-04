@@ -12,6 +12,7 @@ import java.util.Date;
  * @author admin
  */
 public class Model_Hoa_Don {
+private int idHd;
 private String MaHD;
 private   String MaNV; 
 private String TenKH;
@@ -19,7 +20,33 @@ private String SDT;
 private String DiaChi;
 private BigDecimal tongTien;
 private boolean LoaiHoaDon;
+private Date NgayTao;
+private String Nguoitao;
 
+    public int getIdHd() {
+        return idHd;
+    }
+
+    public void setIdHd(int idHd) {
+        this.idHd = idHd;
+    }
+
+
+    public String getNguoitao() {
+        return Nguoitao;
+    }
+
+    public void setNguoitao(String Nguoitao) {
+        this.Nguoitao = Nguoitao;
+    }
+
+    public Date getNgayTao() {
+        return NgayTao;
+    }
+
+    public void setNgayTao(Date NgayTao) {
+        this.NgayTao = NgayTao;
+    }
     public String getMaHD() {
         return MaHD;
     }

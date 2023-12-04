@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  * @author MSI
  */
 public class SanPhamChiTiet {
+    private int id;
      private String tensanpham;
     private String maSPCT;
     private String tenSPCT;
@@ -27,6 +28,14 @@ public class SanPhamChiTiet {
     private boolean trangthai;
 
     public SanPhamChiTiet() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public SanPhamChiTiet(String tensanpham, String maSPCT, String tenSPCT, int soLuong, String noiXuatXu, String tenMauSac, String tenNhanHieu, String tenKichThuoc, String tenCoAo, String tenDangAo, String tenChatLieu, BigDecimal giaNhap, BigDecimal giaBan, boolean trangthai) {
