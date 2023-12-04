@@ -6,8 +6,10 @@ package com.raven.Service;
 
 import com.raven.DBConnect.DBconnect;
 import com.raven.model.Model_SanPhamChiTiet;
+import com.raven.model.SanPhamChiTiet;
 import java.util.List;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 /**
  *
@@ -109,6 +111,87 @@ public class SanPhamChiTietService extends InterfaceCRUD<Model_SanPhamChiTiet, S
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
-    
+    public void updateON(Model_SanPhamChiTiet spct) {
+        String sql="update sanphamchitiet set trangthai=1 where MaSanPhamCT=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setObject(1,spct.getMaSPCT());
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateOff(Model_SanPhamChiTiet spct) {
+        String sql="update SANPHAMCHITIET set TrangThai=0 where MaSanPhamCT=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setObject(1,spct.getMaSPCT());
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateSoLuong(Model_SanPhamChiTiet spct) {
+        String sql="UPDATE SANPHAMCHITIET\n" +
+"SET TrangThai = CASE\n" +
+"    WHEN SoLuongTon = 0 THEN 0\n" +
+"	else TrangThai\n" +
+"END;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public Model_SanPhamChiTiet getCTSPByMa(String Ma) {
+        String sql = "Select MasanphamCT,Tensanphamct,soluongton,giaban,trangthai,idxuatxu,idsanpham,"
+                + "idmausac,idkichthuoc,idnhanhieu,idcoao,iddangao,idchatlieu from sanphamchitiet where masanphamCT=?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setObject(1, Ma);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Model_SanPhamChiTiet ctsp=new Model_SanPhamChiTiet();
+                ctsp.setMaSPCT(rs.getString(1));
+                ctsp.setTenSPCT(rs.getString(2));
+                ctsp.setSoLuong(rs.getInt(3));
+                ctsp.setGiaBan(rs.getBigDecimal(4));
+                ctsp.setTrangthai(rs.getBoolean(5));
+                ctsp.setIdXuatXu(rs.getInt(6));
+                ctsp.setIdsanpham(rs.getInt(7));
+                ctsp.setIdMauSac(rs.getInt(8));
+                ctsp.setIdKichThuoc(rs.getInt(9));
+                ctsp.setIdNhanHieu(rs.getInt(10));
+                ctsp.setIdCoAo(rs.getInt(11));
+                ctsp.setIdDangAo(rs.getInt(12));
+                ctsp.setIdChatLieu(rs.getInt(13));
+                return ctsp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    public Model_SanPhamChiTiet selectSPCTTenBH(String tensp) {
+        String sql="Select id,tensanphamct from sanphamchitiet where tensanphamct=?";
+        List<Model_SanPhamChiTiet> listSPCT= new ArrayList<>();
+        try {
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ps.setObject(1,tensp);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                Model_SanPhamChiTiet spct= new Model_SanPhamChiTiet();
+                spct.setIdCTSP(rs.getInt(1));
+                spct.setTenSPCT(rs.getString(2));
+                return spct;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -12,6 +12,7 @@ import java.util.Date;
  * @author admin
  */
 public class Model_SanPhamChiTiet {
+    private int idCTSP;
     private int idsanpham;
     private String maSPCT;
     private String tenSPCT;
@@ -28,7 +29,7 @@ public class Model_SanPhamChiTiet {
     public Model_SanPhamChiTiet() {
     }
 
-    public Model_SanPhamChiTiet(int idsanpham, String maSPCT, String tenSPCT, int soLuong, int idXuatXu, int idMauSac, int idNhanHieu, int idKichThuoc, int idCoAo, int idDangAo, int idChatLieu, BigDecimal giaBan, boolean trangthai) {
+    public Model_SanPhamChiTiet(int idsanpham, String maSPCT, String tenSPCT, int soLuong, int idXuatXu, int idMauSac, int idNhanHieu, int idKichThuoc, int idCoAo, int idDangAo, int idChatLieu, BigDecimal giaBan) {
         this.idsanpham = idsanpham;
         this.maSPCT = maSPCT;
         this.tenSPCT = tenSPCT;
@@ -42,6 +43,14 @@ public class Model_SanPhamChiTiet {
         this.idChatLieu = idChatLieu;
         this.giaBan = giaBan;
         this.trangthai = trangthai;
+    }
+
+    public int getIdCTSP() {
+        return idCTSP;
+    }
+
+    public void setIdCTSP(int idCTSP) {
+        this.idCTSP = idCTSP;
     }
 
     
