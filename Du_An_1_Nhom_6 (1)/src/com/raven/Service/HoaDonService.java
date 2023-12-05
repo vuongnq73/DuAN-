@@ -90,7 +90,7 @@ public class HoaDonService {
     }
 
     public List<Model_HoaDonChiTiet> selectALllHoaDonChiTiet() {
-        sql = "  select SANPHAMCHITIET.MaSanPhamCT,SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.SoLuong,HoaDonChiTiet.DonGia,HoaDon.TongTien  from HoaDonChiTiet\n"
+        sql = "  select SANPHAMCHITIET.MaSanPhamCT,SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.SoLuong,HoaDonChiTiet.thanhTien,HoaDon.TongTien  from HoaDonChiTiet\n"
                 + " join HoaDon on HoaDon.Id= HoaDonChiTiet.IdHoaDon\n"
                 + " join SANPHAMCHITIET on SANPHAMCHITIET.Id= HoaDonChiTiet.IdSanPhamCt ";
         List<Model_HoaDonChiTiet> listHDCT = new ArrayList<>();
@@ -109,9 +109,10 @@ public class HoaDonService {
         }
     }
 
-    public Model_HoaDonChiTiet selectALllHoaDonChiTietByID(String ID) {
-        Model_HoaDonChiTiet HDCT = null;
-        sql = "	 select SANPHAMCHITIET.MaSanPhamCT,SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.SoLuong,HoaDonChiTiet.DonGia,HoaDon.TongTien  from HoaDonChiTiet\n"
+    public List<Model_HoaDonChiTiet> selectALllHoaDonChiTietByID(String ID) {
+                List<Model_HoaDonChiTiet> listHDCT = new ArrayList<>();
+
+        sql = "	 select SANPHAMCHITIET.MaSanPhamCT,SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.SoLuong,HoaDonChiTiet.thanhTien,HoaDon.TongTien  from HoaDonChiTiet\n"
                 + " join HoaDon on HoaDon.Id= HoaDonChiTiet.IdHoaDon\n"
                 + " join SANPHAMCHITIET on SANPHAMCHITIET.Id= HoaDonChiTiet.IdSanPhamCt where HoaDon.MaHoaDon=?";
         try {// lấy dc dữ liệu
@@ -120,10 +121,10 @@ public class HoaDonService {
             ps.setObject(1, ID);
             rs = ps.executeQuery();
             while (rs.next()) {// đọc từng dòng dữ liệu
-                HDCT = new Model_HoaDonChiTiet(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getBigDecimal(4), rs.getBigDecimal(5));
-
+            Model_HoaDonChiTiet  HDCT = new Model_HoaDonChiTiet(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getBigDecimal(4), rs.getBigDecimal(5));
+      listHDCT.add(HDCT);
             }
-            return HDCT;
+            return listHDCT;
         } catch (Exception e) {// k lấy dc dữ liệu
             e.printStackTrace();
             return null;
@@ -247,7 +248,7 @@ public class HoaDonService {
 
     public List<Model_FindSP> FindSP(String MaHD, String MaSP, String TenSp, BigDecimal donGia, int SoLuong, BigDecimal tongTien, Date ngayTT) {
         List<Model_FindSP> listKH = new ArrayList<>();
-        sql = "select HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.DonGia,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
+        sql = "select HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.thanhtien,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
                 + "                join NhanHieu on NhanHieu.Id= SANPHAMCHITIET.IdNhanHieu\n"
                 + "                join KichThuoc on KichThuoc.Id= SANPHAMCHITIET.IdKichThuoc\n"
                 + "				join HoaDonChiTiet on HoaDonChiTiet.IdSanPhamCt= SANPHAMCHITIET.Id\n"
@@ -281,6 +282,82 @@ public class HoaDonService {
             e.printStackTrace();
         }
         return null;
+    }
+public List<Model_Hoa_Don> selectALllHoaDonBH() {
+        sql = " SELECT TOP 4  hoadon.MaHoadon,Hoadon.createBY,hoadon.TongTien,Hoadon.CreateAt,HoaDon.TrangThai from  HoaDon\n" +
+"WHERE hoadon.id IS NOT NULL\n" +
+"ORDER BY hoadon.id DESC" +
+" ";
+        List<Model_Hoa_Don> listNV = new ArrayList<>();
+        try {// lấy dc dữ liệu
+            con = DBconnect.getConnection();// kết nôi
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Model_Hoa_Don hd= new Model_Hoa_Don();
+                hd.setMaHD(rs.getString(1));
+                hd.setNguoitao(rs.getString(2));
+                hd.setTongTien(rs.getBigDecimal(3));
+                hd.setNgayTao(rs.getDate(4));
+                hd.setTrangThai(rs.getBoolean(5));
+                listNV.add(hd);
+            }
+            return listNV;
+        } catch (Exception e) {// k lấy dc dữ liệu
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public boolean createBill(Model_Hoa_Don hd) {
+        String sql="""
+                   insert into HoaDon(maHoaDon,createBy,createAt,trangthai) values(?,?,?,?)
+                   """;
+        int check=0;
+        try(PreparedStatement ps = con.prepareCall(sql)){
+            ps.setObject(1, hd.getMaHD());
+            ps.setObject(2, hd.getMaHD());
+            ps.setObject(4, hd.isTrangThai());
+            ps.setObject(3, hd.getNgayTao());
+            check=ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check>0;
+    }
+    public void update(HoaDonBH hdbh) {
+        String sql="update hoadon set LoaiKhachHang=?,TongTien=?,TrangThai=1,NgayThanhToan=GETDATE(),"
+                + "Ghichu=?,UpdateAt=getdate(),updateby=?,IdNhanVien=?,IdHinhThucThanhToan=? where MaHoaDon=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setObject(1,hdbh.getLoaiKH());
+            ps.setObject(2, hdbh.getTongTien());
+            ps.setObject(3,hdbh.getGhiChu());
+            ps.setObject(4,hdbh.getUpdateBy());
+            ps.setObject(5,hdbh.getIdNhanVien());
+            ps.setObject(6,hdbh.getIdHTTT());
+            ps.setObject(7,hdbh.getMaHD());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateKH(HoaDonBH hdbh) {
+        String sql="update hoadon set LoaiKhachHang=?,TongTien=?,TrangThai=1,NgayThanhToan=GETDATE(),"
+                + "Ghichu=?,UpdateAt=getdate(),updateby=?,IdNhanVien=?,IdHinhThucThanhToan=?,idKhachHang=? where MaHoaDon=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setObject(1,hdbh.getLoaiKH());
+            ps.setObject(2, hdbh.getTongTien());
+            ps.setObject(3,hdbh.getGhiChu());
+            ps.setObject(4,hdbh.getUpdateBy());
+            ps.setObject(5,hdbh.getIdNhanVien());
+ps.setObject(6,hdbh.getIdHTTT());
+            ps.setObject(7, hdbh.getIdKhachHang());
+            ps.setObject(8,hdbh.getMaHD());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 //  

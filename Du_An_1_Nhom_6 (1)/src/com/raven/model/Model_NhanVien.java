@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Model_NhanVien {
 
+    private int idNhanVien;
     private String MaNhanVien;
     private String MatKhau;
     private boolean ChuVu;
@@ -23,10 +24,9 @@ public class Model_NhanVien {
     private String DiaChi;
     private boolean TrangThai;
 
-
     public Model_NhanVien() {
     }
-
+     
     public Model_NhanVien(String MaNhanVien, String MatKhau, boolean ChuVu, String HoTen, boolean GioiTinh, String CCCD, String SDT, String Email, String DiaChi, boolean TrangThai) {
         this.MaNhanVien = MaNhanVien;
         this.MatKhau = MatKhau;
@@ -38,6 +38,14 @@ public class Model_NhanVien {
         this.Email = Email;
         this.DiaChi = DiaChi;
         this.TrangThai = TrangThai;
+    }
+
+    public int getIdNhanVien() {
+        return idNhanVien;
+    }
+
+    public void setIdNhanVien(int idNhanVien) {
+        this.idNhanVien = idNhanVien;
     }
 
     public String getMaNhanVien() {
@@ -120,14 +128,10 @@ public class Model_NhanVien {
         this.TrangThai = TrangThai;
     }
 
-    
-    public Object[] toDataRow(){
-        
-       return new Object[]{this.MaNhanVien, this.MatKhau, this.ChuVu ? "Nhân viên":"Quản lí", this.HoTen, this.GioiTinh ? "Nam":"Nữ",this.CCCD ,this.SDT, this.Email, this.DiaChi, this.TrangThai ? "Đang làm việc":"Nghỉ làm"};
-       
+    public Object[] toDataRow() {
+
+        return new Object[]{this.MaNhanVien, this.MatKhau, this.ChuVu ? "Nhân viên" : "Quản lí", this.HoTen, this.GioiTinh ? "Nam" : "Nữ", this.CCCD, this.SDT, this.Email, this.DiaChi, this.TrangThai ? "Đang làm việc" : "Nghỉ làm"};
+
     }
 
-   
-
-   
 }

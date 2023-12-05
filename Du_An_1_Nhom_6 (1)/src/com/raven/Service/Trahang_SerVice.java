@@ -26,7 +26,7 @@ public class Trahang_SerVice {
     public Model_FindSP selectHoaDonByQR(String id) {
 
         Model_FindSP HDCT = null;
-        sql = "   select  HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.DonGia,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
+        sql = "   select  HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.thanhtien,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
                 + "                               join NhanHieu on NhanHieu.Id= SANPHAMCHITIET.IdNhanHieu\n"
                 + "                               join KichThuoc on KichThuoc.Id= SANPHAMCHITIET.IdKichThuoc\n"
                 + "                			join HoaDonChiTiet on HoaDonChiTiet.IdSanPhamCt= SANPHAMCHITIET.Id\n"
@@ -57,7 +57,7 @@ public class Trahang_SerVice {
     }
 
     public List<Model_FindSP> selectALllSanPhamFind() {
-        sql = "   select  HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.DonGia,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
+        sql = "   select  HoaDon.MaHoaDon, SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,HoaDonChiTiet.thanhtien,HoaDonChiTiet.SoLuong,HoaDon.TongTien,HoaDon.CreateAt   from SANPHAMCHITIET\n"
                 + "                               join NhanHieu on NhanHieu.Id= SANPHAMCHITIET.IdNhanHieu\n"
                 + "                               join KichThuoc on KichThuoc.Id= SANPHAMCHITIET.IdKichThuoc\n"
                 + "                			join HoaDonChiTiet on HoaDonChiTiet.IdSanPhamCt= SANPHAMCHITIET.Id\n"
@@ -87,7 +87,7 @@ public class Trahang_SerVice {
     }
 
     public Model_TraHang selectALllTraHangBYID(String ID) {
-        sql = " 						select  SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,NhanHieu.TenNhanHieu,KichThuoc.TenKichThuoc,HoaDonChiTiet.DonGia,HoaDon.NgayThanhToan   from SANPHAMCHITIET\n" +
+        sql = " 						select  SANPHAMCHITIET.MaSanPhamCT, SANPHAMCHITIET.TenSanPhamCT,NhanHieu.TenNhanHieu,KichThuoc.TenKichThuoc,HoaDonChiTiet.thanhtien,HoaDon.NgayThanhToan   from SANPHAMCHITIET\n" +
 "                                            join NhanHieu on NhanHieu.Id= SANPHAMCHITIET.IdNhanHieu\n" +
 "                                               join KichThuoc on KichThuoc.Id= SANPHAMCHITIET.IdKichThuoc\n" +
 "                                			join HoaDonChiTiet on HoaDonChiTiet.IdSanPhamCt= SANPHAMCHITIET.Id\n" +

@@ -79,7 +79,7 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         for (int i = 0; i < listNV.size(); i++) {
             Model_NhanVien nv = listNV.get(i);
 
-            Object[] data = new Object[]{i + 1, nv.getMaNhanVien(), nv.getMatKhau(), nv.isChuVu() ? "Nhân viên" : "Quản lí", nv.getHoTen(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(), nv.getEmail(), nv.getDiaChi(), nv.isTrangThai() ? "Đang làm việc" : "Nghỉ làm"};
+            Object[] data = new Object[]{i + 1, nv.getMaNhanVien(), nv.isChuVu() ? "Nhân viên" : "Quản lí", nv.getHoTen(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(), nv.getEmail(), nv.getDiaChi(), nv.isTrangThai() ? "Đang làm việc" : "Nghỉ làm"};
             mol.addRow(data);
         }
     }
@@ -263,13 +263,11 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
             JOptionPane.showMessageDialog(this, "Failed to send email: " + ex.getMessage());
         }
     }
-    public void closeWebcam() {
-        if (webcam.isOpen()) {
-            webcam.close();
-        }
-    }
 
-    private void initWebcam() {
+
+
+    
+       private void initWebcam() {
         // Kiểm tra xem webcam có tồn tại không
         if (webcam == null) {
             List<Webcam> webcams = Webcam.getWebcams();
@@ -284,7 +282,7 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         // Đóng webcam nếu nó đã mở
         if (webcam.isOpen()) {
-            webcam.close();
+            closeWebcam();
         }
 
         // Thay đổi độ phân giải
@@ -304,27 +302,38 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         executor.execute(this);
     }
 
+    private volatile boolean isRunning = true;
+
+    @Override
     public void run() {
         do {
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Form_Nhan_Vien.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
             Result result = null;
             BufferedImage image = null;
+
             if (webcam.isOpen()) {
-                if ((image = webcam.getImage()) == null) {
-                    continue;
+                image = webcam.getImage();
+                if (image == null) {
+                    continue; // Nếu image là null, bỏ qua vòng lặp và thử lại
                 }
+            } else {
+                continue; // Nếu webcam chưa mở, bỏ qua vòng lặp và thử lại
             }
+
             LuminanceSource source = new BufferedImageLuminanceSource(image);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
             try {
                 result = new MultiFormatReader().decode(bitmap);
-            } catch (NotFoundException ex) {
-                Logger.getLogger(Form_Nhan_Vien.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NotFoundException e) {
+                // No result...
             }
+
             if (result != null) {
                 String[] cccd = result.getText().split("\\|");
                 txtten.setText(cccd[2]);
@@ -336,7 +345,9 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
                 }
                 txtcccd.setText(cccd[0]);
                 txtdiachi.setText(cccd[5]);
-
+            }
+            if (!isRunning) {
+                break;
             }
         } while (true);
     }
@@ -347,6 +358,19 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         t.setDaemon(true);
         return t;
     }
+
+    public void closeWebcam() {
+        if (webcam.isOpen()) {
+            webcam.close();
+        }
+    }
+
+    private void openWebCam() {
+        this.initWebcam();
+    }
+    
+    
+    
     void fillTableByTrangThai() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -472,6 +496,8 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -498,6 +524,8 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         jLabel10 = new javax.swing.JLabel();
         pwfmk = new javax.swing.JPasswordField();
         WebcamPN = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cbogioitinh = new javax.swing.JComboBox<>();
@@ -587,11 +615,15 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         jLabel1.setText("Mã NV");
 
+        txtmanv.setEnabled(false);
+
         jLabel2.setText("Giới tính");
 
+        buttonGroup2.add(rdonam);
         rdonam.setSelected(true);
         rdonam.setText("Nam");
 
+        buttonGroup2.add(rdonu);
         rdonu.setText("Nữ");
 
         jLabel3.setText("Tên NV");
@@ -604,9 +636,11 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         jLabel7.setText("Chức vụ");
 
+        buttonGroup1.add(rdonv);
         rdonv.setSelected(true);
         rdonv.setText("Nhân viên");
 
+        buttonGroup1.add(rdoql);
         rdoql.setText("Quản lí");
 
         jLabel9.setText("Email");
@@ -617,6 +651,26 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         WebcamPN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         WebcamPN.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton5.setBackground(new java.awt.Color(102, 102, 255));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Tắt WebCam");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(102, 102, 255));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Bật WebCam");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -690,8 +744,16 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)))
-                .addComponent(WebcamPN, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(WebcamPN, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)
+                        .addGap(88, 88, 88))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,9 +794,13 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(WebcamPN, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -812,7 +878,6 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         txtfind.setBackground(new java.awt.Color(204, 204, 204));
         txtfind.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        txtfind.setText("tìm kiếm theo mã nv, tên nv, cccd, số đt, email, địa chỉ");
         txtfind.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtfindKeyReleased(evt);
@@ -846,13 +911,13 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã NV", "Mật khẩu", "Chức vụ", "Họ tên", "Giới tính", "CCCD", "Số ĐT", "Email", "Địa chỉ", "Trạng thái"
+                "STT", "Mã NV", "Chức vụ", "Họ tên", "Giới tính", "CCCD", "Số ĐT", "Email", "Địa chỉ", "Trạng thái"
             }
         ));
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -873,7 +938,7 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1036,6 +1101,15 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
             fillTable(ser.selectALll());
         }
     }//GEN-LAST:event_cbochucvuItemStateChanged
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+closeWebcam();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        openWebCam();
+    }//GEN-LAST:event_jButton6ActionPerformed
     private void reset() {
         txtmanv.setText("");
         txtten.setText("");
@@ -1049,6 +1123,8 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel WebcamPN;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbochucvu;
     private javax.swing.JComboBox<String> cbogioitinh;
     private javax.swing.JComboBox<String> cbotrangthai;
@@ -1056,6 +1132,8 @@ public class Form_Nhan_Vien extends javax.swing.JPanel implements ThreadFactory,
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

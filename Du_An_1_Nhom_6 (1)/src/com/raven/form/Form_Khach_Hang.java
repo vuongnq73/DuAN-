@@ -214,20 +214,20 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Mã khách hàng");
 
-        txtmakh.setBackground(new java.awt.Color(204, 204, 204));
+        txtmakh.setBackground(new java.awt.Color(255, 255, 255));
         txtmakh.setEnabled(false);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Tên khách hàng");
 
-        txttenkhachhang.setBackground(new java.awt.Color(204, 204, 204));
+        txttenkhachhang.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Số điện thoại");
 
-        txtsodienthoai.setBackground(new java.awt.Color(204, 204, 204));
+        txtsodienthoai.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtemail.setBackground(new java.awt.Color(204, 204, 204));
+        txtemail.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Địa chỉ...");
@@ -306,7 +306,7 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        txtdiachi.setBackground(new java.awt.Color(204, 204, 204));
+        txtdiachi.setBackground(new java.awt.Color(255, 255, 255));
         txtdiachi.setColumns(20);
         txtdiachi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtdiachi.setForeground(new java.awt.Color(255, 255, 255));
@@ -452,8 +452,7 @@ public class Form_Khach_Hang extends javax.swing.JPanel {
             }
         });
 
-        txtfind.setBackground(new java.awt.Color(204, 204, 204));
-        txtfind.setText("Tìm kiếm theo mã, tên, số điện thoại, email");
+        txtfind.setBackground(new java.awt.Color(255, 255, 255));
         txtfind.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtfindKeyReleased(evt);

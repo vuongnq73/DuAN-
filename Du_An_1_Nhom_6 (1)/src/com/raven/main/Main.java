@@ -31,12 +31,12 @@ public class Main extends javax.swing.JFrame {
     private Form_Hoa_Don Hoadon;
     private Form_Nhan_Vien NhanVien;
     private Form_Ban_Hang banHang;
-    private Form_Voucher voucher;
     private Form_Khach_Hang khachHang;
 
     public Main() {
         initComponents();
-//        this.login();
+        this.login();
+        
         setBackground(new Color(0, 0, 0, 0));
         thongKe = new Form_Thong_Ke();
         SanPham = new Form_San_Pham();
@@ -44,7 +44,6 @@ public class Main extends javax.swing.JFrame {
         NhanVien = new Form_Nhan_Vien();
         banHang = new Form_Ban_Hang();
         khachHang = new Form_Khach_Hang();
-        voucher = new Form_Voucher();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -60,17 +59,15 @@ public class Main extends javax.swing.JFrame {
                     setForm(NhanVien);
                 } else if (index == 4) {
                     setForm(khachHang);
-                } else if (index == 5) {
-                    setForm(voucher);
-                } else if (index == 6) {
+                } else if  (index == 5) {
                     setForm(thongKe);
-                } else if (index == 7) {
+                } else if (index == 6) {
                     dangXuat();
                 }
             }
         });
         //  set when system open start with home form
-        setForm(new Form_Thong_Ke());
+        setForm(new Form_Ban_Hang());
     }
 
     void dangXuat() {
@@ -132,7 +129,7 @@ public class Main extends javax.swing.JFrame {
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -143,11 +140,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 1482, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
         );
 
         pack();

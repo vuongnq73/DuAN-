@@ -36,7 +36,7 @@ public class ThongKe_Service implements thongKeDao {
                 + "    MauSac.TenMauSac,\n"
                 + "    KichThuoc.TenKichThuoc,\n"
                 + "   SUM(HoaDonChiTiet.SoLuong) AS TongSoLuong,\n"
-                + "   SUM(hoadonchitiet.DonGia) as tien\n"
+                + "   SUM(hoadonchitiet.thanhtien) as tien\n"
                 + "FROM\n"
                 + "    HoaDonChiTiet\n"
                 + "JOIN SANPHAMCHITIET ON SANPHAMCHITIET.Id = HoaDonChiTiet.IdSanPhamCt\n"
@@ -90,7 +90,7 @@ public class ThongKe_Service implements thongKeDao {
                 throw new IllegalArgumentException("Invalid time unit: " + timeUnit);
         }
 
-        String sql = "SELECT " + timeUnitField + " as timeUnit, SUM(HoaDonChiTiet.DonGia) as doanhthu "
+        String sql = "SELECT " + timeUnitField + " as timeUnit, SUM(HoaDonChiTiet.thanhtien) as doanhthu "
                 + "FROM HoaDon JOIN HoaDonChiTiet ON HoaDonChiTiet.IdHoaDon = HoaDon.id "
                 + "GROUP BY " + timeUnitField;
 
@@ -115,7 +115,7 @@ public class ThongKe_Service implements thongKeDao {
     }
 
     public List<DoanhThu_Service> getListByDoanhThu1(int month) {
-        String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.DonGia) as doanhthu "
+        String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.thanhtien) as doanhthu "
                 + "FROM HoaDon JOIN HoaDonChiTiet ON HoaDonChiTiet.IdHoaDon = HoaDon.id "
                 + "WHERE  MONTH(NgayThanhToan) = ? "
                 + "GROUP BY NgayThanhToan";
@@ -143,7 +143,7 @@ public class ThongKe_Service implements thongKeDao {
 
 // ...
     public List<DoanhThu_Service> getListByDoanhThu2(int startYear, int startMonth, int startDay, int endYear, int endMonth, int endDay) {
-        String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.DonGia) as doanhthu "
+        String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.thanhtien) as doanhthu "
                 + "FROM HoaDon JOIN HoaDonChiTiet ON HoaDonChiTiet.IdHoaDon = HoaDon.id "
                 + "WHERE NgayThanhToan BETWEEN ? AND ? "
                 + "GROUP BY NgayThanhToan";
@@ -188,7 +188,7 @@ public class ThongKe_Service implements thongKeDao {
 // ...
 
 public List<DoanhThu_Service> getListByDoanhThu3(String startDate, String endDate) {
-    String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.DonGia) as doanhthu " +
+    String sql = "SELECT NgayThanhToan, SUM(HoaDonChiTiet.thanhtien) as doanhthu " +
                  "FROM HoaDon JOIN HoaDonChiTiet ON HoaDonChiTiet.IdHoaDon = HoaDon.id " +
                  "WHERE NgayThanhToan BETWEEN ? AND ? " +
                  "GROUP BY NgayThanhToan";

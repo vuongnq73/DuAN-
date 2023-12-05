@@ -55,6 +55,7 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         setTimeNam();
         setDataToChartToDay(pnlDTTKCot);
         filltableThongKe();
+        unit();
     }
 
     private void setTimeNgay() {
@@ -100,12 +101,11 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         setDataToChart1(pnlDTTKCot, selectedTimeUnit);
     }
 
-//    private void unit() {
-//        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Số Hóa Đơn", "25"));
-//        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/profit.png")), "Doanh Thu", "$25000000"));
-//        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Khách", "30"));
-//        card4.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Đơn Hủy", "3"));
-//
+    private void unit() {
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Số Hóa Đơn", "25"));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/profit.png")), "Doanh Thu", "$25000000"));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Số Khách", "30"));
+
 //        setBackground(new Color(250, 250, 250));
 ////        chart.addLegend("Doanh Thu", new Color(245, 189, 135));
 //        pnlDTTKCot.addLegend("Doanh Thu", new Color(135, 189, 245));
@@ -123,7 +123,7 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
 //        pnlDTTKCot.addData(new ModelChart("October", new double[]{190, 280, 81, 200}));
 //        pnlDTTKCot.addData(new ModelChart("November", new double[]{190, 280, 81, 200}));
 //        pnlDTTKCot.addData(new ModelChart("December", new double[]{190, 280, 81, 200}));
-//    }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -134,7 +134,6 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         card1 = new com.raven.component.Card();
         card2 = new com.raven.component.Card();
         card3 = new com.raven.component.Card();
-        card4 = new com.raven.component.Card();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -170,10 +169,6 @@ public class Form_Thong_Ke extends javax.swing.JPanel {
         card3.setColor1(new java.awt.Color(241, 208, 62));
         card3.setColor2(new java.awt.Color(211, 184, 61));
         panel.add(card3);
-
-        card4.setColor1(new java.awt.Color(218, 75, 192));
-        card4.setColor2(new java.awt.Color(171, 48, 89));
-        panel.add(card4);
 
         jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -790,7 +785,6 @@ public void setDataToChartToDay(JPanel jpnItem) {
     private com.raven.component.Card card1;
     private com.raven.component.Card card2;
     private com.raven.component.Card card3;
-    private com.raven.component.Card card4;
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateCuoi;
     private com.toedter.calendar.JDateChooser jDateDau;
